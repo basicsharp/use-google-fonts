@@ -25,7 +25,7 @@ const useGoogleFonts = (
   fonts: Font[],
   options: Options = defaultOptions
 ): void => {
-  const fontsWithSizes = fonts.map((fontArray) => {
+  const fontsWithSizes = fonts.map(fontArray => {
     const font = fontArray[0].replace(new RegExp(' ', 'g'), '+')
     let sizes = ''
 
@@ -38,15 +38,19 @@ const useGoogleFonts = (
 
   const fontsUri = fontsWithSizes.join('|')
   const swap = `&display=${options.display}`
+  const subset =
+    options.subset != null ? `&subset=${options.subset.join(',')}` : ''
 
   useEffect(() => {
     const link = document.createElement('link')
-    link.href = `https://fonts.googleapis.com/css?family=${fontsUri + swap}`
+    link.href = `https://fonts.googleapis.com/css?family=${fontsUri +
+      swap +
+      subset}`
     link.rel = 'stylesheet'
 
     document.head.appendChild(link)
 
-    fonts.map(async (font) => {
+    fonts.map(async font => {
       const fontClass = font[0].replace(new RegExp(' ', 'g'), '-')
       const fontFace = new FontFaceObserver(font[0])
       await fontFace.load()

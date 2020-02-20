@@ -1,11 +1,12 @@
 interface Options {
   addBodyClass?: Boolean
-  display: String | null | undefined
+  display: string | null | undefined
+  subset: string[]
 }
 
 const defaultOptions = {
   addBodyClass: false,
-  display: 'swap'
+  display: 'swap',
 }
 
 export { Options, defaultOptions }
